@@ -8,23 +8,35 @@ using System;
 [Serializable]
 public class EventList : ScriptableObject {
 
-	public List<Event> eventsList;
+	public List<GameEvent> eventsList;
 
 }
 	
 [Serializable]
-public struct Event{
+public class GameEvent{
+	public bool repeatable;
+	private bool occurred = false;
+
+	public void toggleOccured(){
+		occurred = true;
+	}
+
+	public bool hasOccured(){
+		return occurred;
+	}
 
 	[HeaderAttribute("Event")]
 	public string eventMessage;
 
 	[HeaderAttribute("Choices")]
-	public List<Choices> eventOptions;
+	public List<Choice> eventOptions;
 }
 
 
 [Serializable]
-public struct Choices{
+public struct Choice{
+
+
 	[HeaderAttribute("Choice Message")]
 	public string choiceMessage;
 
