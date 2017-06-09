@@ -8,7 +8,9 @@ using System;
 [Serializable]
 public class EventList : ScriptableObject {
 
+	public int probabilityWeight;
 	public List<GameEvent> eventsList;
+
 
 }
 	
@@ -45,5 +47,6 @@ public struct Choice{
 	public int effectOnNoble;
 	public int effectOnClergy;
 	public int effectOnRoyalTreasury;
+
 
 }

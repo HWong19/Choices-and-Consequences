@@ -5,14 +5,16 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
 	public static GameController gameController;		//singleton
-	public EventList eventList;
+	public EventList[] eventLists;
 
 
 	public int minStartingAffinity;
 	public int maxStartingAffinity;
 	public int minStartingMoney;
 	public int maxStartingMoney;
-
+	public float maxTimerDecreaseRate;
+	public float minTimerDecreaseRate;
+	public float discontentionMultiplier;
 
 	private int peasantAffinity;
 	private int nobleAffinity;
@@ -32,7 +34,7 @@ public class GameController : MonoBehaviour {
 			Destroy (this);
 		}
 	}
-	
+		
 	//----------------------geters and seters and incrementers-------------------------
 
 	public int GetPeasantAffinity() {return peasantAffinity;}
@@ -89,11 +91,31 @@ public class GameController : MonoBehaviour {
 		return result;
 	}
 
+	public void ApplyOptionEffects(int option){
+		IncPeasantAffinity (currentGameEvent.eventOptions [option].effectOnPeasant);
+		IncNobleAffinity (currentGameEvent.eventOptions [option].effectOnNoble);
+		IncClergyAffinity (currentGameEvent.eventOptions [option].effectOnClergy);
+		IncRoyalTreasury (currentGameEvent.eventOptions [option].effectOnRoyalTreasury);
+	}
 
+	public int[] GetOptionEffects(int option){
+		return new int[]{currentGameEvent.eventOptions [option].effectOnPeasant,currentGameEvent.eventOptions [option].effectOnNoble,
+			currentGameEvent.eventOptions [option].effectOnClergy,currentGameEvent.eventOptions [option].effectOnRoyalTreasury};
+	}
+
+	public void DecrementAffinity(){
+		peasantAffinity -= 1;
+		nobleAffinity -= 1;
+		clergyAffinity -= 1;
+	}
+
+
+	//-------------------------------------------------------------------------------------------------
 	public GameEvent ChooseRandomGameEvent(){
 		while (true) {
+			EventList eventList = ChooseRandomEventList ();
 			currentGameEvent = eventList.eventsList [Random.Range (0, eventList.eventsList.Count)];
-			if (!currentGameEvent.repeatable && currentGameEvent.hasOccured()) {
+			if (currentGameEvent.eventMessage == "" || (!currentGameEvent.repeatable && currentGameEvent.hasOccured())) {
 				continue;
 			} else {
 				currentGameEvent.toggleOccured ();
@@ -102,12 +124,42 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	private EventList ChooseRandomEventList(){
+		float totalWeight = 0f;
+		foreach (EventList el in eventLists) {
+			totalWeight += el.probabilityWeight;
+		}
+		float chosenNumber = Random.Range (0f, totalWeight);
 
-	public void ApplyOptionEffects(int option){
-		IncPeasantAffinity (currentGameEvent.eventOptions [option].effectOnPeasant);
-		IncNobleAffinity (currentGameEvent.eventOptions [option].effectOnNoble);
-		IncClergyAffinity (currentGameEvent.eventOptions [option].effectOnClergy);
-		IncRoyalTreasury (currentGameEvent.eventOptions [option].effectOnRoyalTreasury);
+		foreach (EventList el in eventLists) {
+			if (chosenNumber <= el.probabilityWeight) {
+				return el;
+			} else {
+				chosenNumber -= el.probabilityWeight;
+			}
+		}
+		print ("I done goofed");
+		return new EventList ();
 	}
+		
+	//------------------------------------------------------------------------------------------------------------
+	public float GetTimerDecreaseRate(){
+		float decreaseRate = minTimerDecreaseRate;
+		decreaseRate = decreaseRate + ((300 - peasantAffinity - nobleAffinity - clergyAffinity) * discontentionMultiplier);
+		if (decreaseRate > maxTimerDecreaseRate){
+			decreaseRate = maxTimerDecreaseRate;
+		}
+		return decreaseRate;
+	}
+
+	public void StartDiscontention(){
+		InvokeRepeating ("DecrementAffinity", 0f, 0.5f);
+	}
+
+	public void StopDiscontention(){
+		CancelInvoke ();
+	}
+
+
 }
   

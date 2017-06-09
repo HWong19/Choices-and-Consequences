@@ -16,21 +16,46 @@ public class UIController : MonoBehaviour {
 	public Text eventText;
 
 	public GameObject[] buttonList;
+	public GameObject[] arrowsList;
 
 	private GameController GC;
 	private bool gameOver;
+	private float timerDecreaseRate;
+	private bool discontent;
 
 	void Start () {
 		GC = GameController.gameController;
 		RefreshUI ();
 		gameOver = false;
+		discontent = false;
+		DisableArrows ();
 
+	}
+
+	void FixedUpdate(){
+		if (!gameOver){
+			timerSlider.value -= timerDecreaseRate;
+			if (timerSlider.value <= 0) {
+				if (!discontent) {
+					GC.StartDiscontention ();
+				}
+				discontent = true;
+				RefreshAffinities ();
+				if (!CheckAffinities ()) {
+					gameOver = true;
+					DisplayGameOverEvent ();
+				}
+			}
+		}
 	}
 
 	public void RefreshUI(){
 		RefreshAffinities ();
 		if (CheckAffinities ()) {
 			ReloadEventPanel ();
+			RestartTimer ();
+			GC.StopDiscontention ();
+			discontent = false;
 		} else {
 			gameOver = true;
 			DisplayGameOverEvent ();
@@ -51,7 +76,7 @@ public class UIController : MonoBehaviour {
 	}
 
 	private void RefreshAffinity(Text textGameObject, int affinity){
-		if (affinity == 0) {
+		if (affinity <= 0) {
 			textGameObject.text += "Openly Hostile";
 		} else if (affinity < 20) {
 			textGameObject.text += "Extremely Angry";
@@ -67,6 +92,7 @@ public class UIController : MonoBehaviour {
 			textGameObject.text += "Utterly Euphoric";
 		}
 	}
+		
 
 	private void ReloadEventPanel(){
 		GameEvent gameEvent = GC.ChooseRandomGameEvent ();
@@ -102,39 +128,68 @@ public class UIController : MonoBehaviour {
 		buttonList [0].SetActive (true);
 		buttonList [0].GetComponentInChildren<Text> ().text = "Continue";
 	}
-
-
-
-
-
+		
 
 	public void Option1Chosen(){
 		if (gameOver) {
 			DisplayGameOverPanel ();
 		} else {
 			GC.ApplyOptionEffects (0);
+			RefreshArrows (0);
 			RefreshUI ();
+
 		}
 	}
 
 	public void Option2Chosen(){
 		GC.ApplyOptionEffects (1);
+		RefreshArrows (1);
 		RefreshUI ();
+
 
 	}
 
 	public void Option3Chosen(){
 		GC.ApplyOptionEffects (2);
+		RefreshArrows (2);
 		RefreshUI ();
+
 
 	}
 
 	public void Option4Chosen(){
 		GC.ApplyOptionEffects (3);
+		RefreshArrows (3);
 		RefreshUI ();
+
+	}
+
+	private void DisableArrows(){
+		foreach (GameObject go in arrowsList) {
+			go.SetActive (false);
+		}
+	}
+
+	private void RefreshArrows(int option){
+		DisableArrows ();
+
+		int[] optionEffects = GC.GetOptionEffects (option);
+
+		for (int i = 0; i < optionEffects.Length; ++i) {
+			if (optionEffects [i] > 0) {
+				arrowsList [2*i].SetActive (true);
+			} else if (optionEffects [i] < 0) {
+				arrowsList [(2*i) + 1].SetActive (true);
+			}
+		}
 	}
 
 	public void DisplayGameOverPanel(){
 		gameOverPanel.SetActive (true);
+	}
+		
+	private void RestartTimer(){
+		timerSlider.value = 100;
+		timerDecreaseRate = GC.GetTimerDecreaseRate ();
 	}
 }

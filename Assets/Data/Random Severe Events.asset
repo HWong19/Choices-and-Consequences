@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21aece6877884654a9af4cabfaf11dbf, type: 3}
+  m_Name: Random Severe Events
+  m_EditorClassIdentifier: 
+  probabilityWeight: 1
+  eventsList:
+  - repeatable: 1
+    eventMessage: A tornado rips through the city.
+    eventOptions:
+    - choiceMessage: Start relief efforts
+      effectOnPeasant: 10
+      effectOnNoble: 10
+      effectOnClergy: 10
+      effectOnRoyalTreasury: -1500
+    - choiceMessage: Don't provide aid
+      effectOnPeasant: -20
+      effectOnNoble: -20
+      effectOnClergy: -20
+      effectOnRoyalTreasury: 0
+  - repeatable: 0
+    eventMessage: You find a giant pile of forgotten gold in the basement.
+    eventOptions:
+    - choiceMessage: $$$
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 1200
+  - repeatable: 1
+    eventMessage: One of your children made fun of the poor.
+    eventOptions:
+    - choiceMessage: Apologize
+      effectOnPeasant: 15
+      effectOnNoble: -17
+      effectOnClergy: 2
+      effectOnRoyalTreasury: 0
+    - choiceMessage: Defend your child's statement
+      effectOnPeasant: -20
+      effectOnNoble: 22
+      effectOnClergy: -2
+      effectOnRoyalTreasury: 0
+    - choiceMessage: Do nothing
+      effectOnPeasant: -15
+      effectOnNoble: 15
+      effectOnClergy: -2
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: A plague runs rampant in the poorer areas.
+    eventOptions:
+    - choiceMessage: Quarantine them and provide treatment
+      effectOnPeasant: 30
+      effectOnNoble: 10
+      effectOnClergy: 10
+      effectOnRoyalTreasury: -1300
+    - choiceMessage: Only quarantine
+      effectOnPeasant: -10
+      effectOnNoble: 2
+      effectOnClergy: 0
+      effectOnRoyalTreasury: -50
+    - choiceMessage: Do nothing
+      effectOnPeasant: -20
+      effectOnNoble: -20
+      effectOnClergy: -20
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 0
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 0
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 0
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 0
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 0
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 0
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0

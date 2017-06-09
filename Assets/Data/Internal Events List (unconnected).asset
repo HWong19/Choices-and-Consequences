@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aece6877884654a9af4cabfaf11dbf, type: 3}
   m_Name: Internal Events List (unconnected)
   m_EditorClassIdentifier: 
+  probabilityWeight: 19
   eventsList:
   - repeatable: 1
     eventMessage: The roads in the poorer parts of the city are cracked and are in
@@ -18,11 +19,11 @@ MonoBehaviour:
     eventOptions:
     - choiceMessage: Fix the roads
       effectOnPeasant: 10
-      effectOnNoble: 1
+      effectOnNoble: 2
       effectOnClergy: 0
-      effectOnRoyalTreasury: -200
+      effectOnRoyalTreasury: -400
     - choiceMessage: Leave them be
-      effectOnPeasant: -10
+      effectOnPeasant: -7
       effectOnNoble: -1
       effectOnClergy: 0
       effectOnRoyalTreasury: 0
@@ -30,20 +31,20 @@ MonoBehaviour:
     eventMessage: The royal coffers can use some more money.
     eventOptions:
     - choiceMessage: Tax bread
-      effectOnPeasant: -20
+      effectOnPeasant: -10
       effectOnNoble: 0
       effectOnClergy: 0
-      effectOnRoyalTreasury: 500
+      effectOnRoyalTreasury: 250
     - choiceMessage: Tax caviar
       effectOnPeasant: 0
-      effectOnNoble: -15
+      effectOnNoble: -6
       effectOnClergy: 0
-      effectOnRoyalTreasury: 300
+      effectOnRoyalTreasury: 150
     - choiceMessage: Tax tithe
       effectOnPeasant: 0
       effectOnNoble: 0
-      effectOnClergy: -10
-      effectOnRoyalTreasury: 200
+      effectOnClergy: -4
+      effectOnRoyalTreasury: 100
     - choiceMessage: Don't tax
       effectOnPeasant: 0
       effectOnNoble: 0
@@ -53,16 +54,84 @@ MonoBehaviour:
     eventMessage: The church wants to make brothels illegal.
     eventOptions:
     - choiceMessage: Ban brothels
-      effectOnPeasant: -2
-      effectOnNoble: -15
-      effectOnClergy: 15
+      effectOnPeasant: -10
+      effectOnNoble: -2
+      effectOnClergy: 13
       effectOnRoyalTreasury: 0
     - choiceMessage: Tell the church to suck it up.
-      effectOnPeasant: 2
-      effectOnNoble: 15
-      effectOnClergy: -15
+      effectOnPeasant: 7
+      effectOnNoble: 2
+      effectOnClergy: -10
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: The people want funding to make a statue of a local hero.
+    eventOptions:
+    - choiceMessage: Fund it
+      effectOnPeasant: 10
+      effectOnNoble: -2
+      effectOnClergy: 0
+      effectOnRoyalTreasury: -800
+    - choiceMessage: Don't fund it
+      effectOnPeasant: -8
+      effectOnNoble: 1
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: Noble accused of murdering a peasant offers a bribe in return for
+      a better verdict.
+    eventOptions:
+    - choiceMessage: Accept bribe
+      effectOnPeasant: -15
+      effectOnNoble: 5
+      effectOnClergy: -1
+      effectOnRoyalTreasury: 600
+    - choiceMessage: Don't accept bribe
+      effectOnPeasant: 8
+      effectOnNoble: -10
+      effectOnClergy: 1
+      effectOnRoyalTreasury: 0
+    - choiceMessage: Don't accept bribe and charge for bribery
+      effectOnPeasant: 18
+      effectOnNoble: -20
+      effectOnClergy: 3
       effectOnRoyalTreasury: 0
   - repeatable: 0
+    eventMessage: The church wants to ban good luck charms.
+    eventOptions:
+    - choiceMessage: Ban them
+      effectOnPeasant: -7
+      effectOnNoble: -8
+      effectOnClergy: 15
+      effectOnRoyalTreasury: 0
+    - choiceMessage: Don't ban them
+      effectOnPeasant: 7
+      effectOnNoble: 8
+      effectOnClergy: -15
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: The church asks you for donations to help the sick and the poor.
+    eventOptions:
+    - choiceMessage: Give them 2000 gold
+      effectOnPeasant: 20
+      effectOnNoble: 0
+      effectOnClergy: 20
+      effectOnRoyalTreasury: -2000
+    - choiceMessage: Give them 1000 gold
+      effectOnPeasant: 10
+      effectOnNoble: 0
+      effectOnClergy: 10
+      effectOnRoyalTreasury: -1000
+    - choiceMessage: Give them 500 gold
+      effectOnPeasant: 5
+      effectOnNoble: 0
+      effectOnClergy: 5
+      effectOnRoyalTreasury: -500
+    - choiceMessage: Don't give them anything
+      effectOnPeasant: -5
+      effectOnNoble: 0
+      effectOnClergy: -5
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
     eventMessage: 
     eventOptions:
     - choiceMessage: 
@@ -75,6 +144,152 @@ MonoBehaviour:
       effectOnNoble: 0
       effectOnClergy: 0
       effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+    - choiceMessage: 
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: 0
+      effectOnRoyalTreasury: 0
+  - repeatable: 1
+    eventMessage: 
+    eventOptions:
     - choiceMessage: 
       effectOnPeasant: 0
       effectOnNoble: 0
