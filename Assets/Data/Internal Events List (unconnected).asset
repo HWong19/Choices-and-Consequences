@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aece6877884654a9af4cabfaf11dbf, type: 3}
   m_Name: Internal Events List (unconnected)
   m_EditorClassIdentifier: 
-  probabilityWeight: 19
+  probabilityWeight: 15
   eventsList:
   - repeatable: 1
     eventMessage: The roads in the poorer parts of the city are cracked and are in
@@ -131,31 +131,32 @@ MonoBehaviour:
       effectOnNoble: 0
       effectOnClergy: -5
       effectOnRoyalTreasury: 0
-  - repeatable: 1
-    eventMessage: 
+  - repeatable: 0
+    eventMessage: Nobles are complaining about peasants hanging around their favorite
+      tea spots.
     eventOptions:
-    - choiceMessage: 
-      effectOnPeasant: 0
-      effectOnNoble: 0
+    - choiceMessage: Make loitering illegal
+      effectOnPeasant: -10
+      effectOnNoble: 10
       effectOnClergy: 0
       effectOnRoyalTreasury: 0
-    - choiceMessage: 
-      effectOnPeasant: 0
-      effectOnNoble: 0
+    - choiceMessage: Ignore them
+      effectOnPeasant: 10
+      effectOnNoble: -10
       effectOnClergy: 0
       effectOnRoyalTreasury: 0
   - repeatable: 1
-    eventMessage: 
+    eventMessage: The church wants you to arrest a couple of nobles for adultery.
     eventOptions:
-    - choiceMessage: 
+    - choiceMessage: Arrest them
       effectOnPeasant: 0
-      effectOnNoble: 0
-      effectOnClergy: 0
+      effectOnNoble: -15
+      effectOnClergy: 15
       effectOnRoyalTreasury: 0
-    - choiceMessage: 
+    - choiceMessage: Don't arrest them
       effectOnPeasant: 0
-      effectOnNoble: 0
-      effectOnClergy: 0
+      effectOnNoble: 15
+      effectOnClergy: -15
       effectOnRoyalTreasury: 0
   - repeatable: 1
     eventMessage: 

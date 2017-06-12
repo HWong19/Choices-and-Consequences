@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
 
+	public static UIController UIC;
+
 	public GameObject gameOverPanel;
+	public GameObject winPanel;
 	public Text peasantAffinityText;
 	public Text nobleAffinityText;
 	public Text clergyAffinityText;
@@ -22,6 +25,19 @@ public class UIController : MonoBehaviour {
 	private bool gameOver;
 	private float timerDecreaseRate;
 	private bool discontent;
+	private int year;
+	private int yearToWin;
+	private float timeToWin;
+	private float timeYearStarted;
+
+
+	void Awake(){
+		if (UIC == null) {
+			UIC = this;
+		} else {
+			Destroy (this);
+		}
+	}
 
 	void Start () {
 		GC = GameController.gameController;
@@ -29,7 +45,11 @@ public class UIController : MonoBehaviour {
 		gameOver = false;
 		discontent = false;
 		DisableArrows ();
-
+		year = GC.GetStartYear ();
+		yearToWin = year + GC.GetYearsTillRetirement ();
+		dateText.text = "Year: " + year.ToString();
+		timeToWin = GC.GetTimeToWin ();
+		timeYearStarted = Time.time;
 	}
 
 	void FixedUpdate(){
@@ -44,6 +64,14 @@ public class UIController : MonoBehaviour {
 				if (!CheckAffinities ()) {
 					gameOver = true;
 					DisplayGameOverEvent ();
+				}
+			}
+
+			if (Time.time - timeYearStarted >= timeToWin / 50) {
+				IncrementYear ();
+				timeYearStarted = Time.time;
+				if (year == yearToWin) {
+					DisplayWinEvent ();
 				}
 			}
 		}
@@ -107,7 +135,12 @@ public class UIController : MonoBehaviour {
 
 		}
 	}
-		
+
+	private void RestartTimer(){
+		timerSlider.value = 100;
+		timerDecreaseRate = GC.GetTimerDecreaseRate ();
+	}
+
 	private bool CheckAffinities(){
 		bool[] affinityArray =  GC.AreAffinitiesAcceptable ();
 
@@ -142,10 +175,13 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void Option2Chosen(){
-		GC.ApplyOptionEffects (1);
-		RefreshArrows (1);
-		RefreshUI ();
-
+		if (gameOver) {
+			DisplayWinPanel ();
+		} else {
+			GC.ApplyOptionEffects (1);
+			RefreshArrows (1);
+			RefreshUI ();
+		}
 
 	}
 
@@ -184,12 +220,28 @@ public class UIController : MonoBehaviour {
 		}
 	}
 
+	public void IncrementYear(){
+		print ("boop");
+		++year;
+		dateText.text = "Year: " + year.ToString();
+	}
+
 	public void DisplayGameOverPanel(){
 		gameOverPanel.SetActive (true);
 	}
 		
-	private void RestartTimer(){
-		timerSlider.value = 100;
-		timerDecreaseRate = GC.GetTimerDecreaseRate ();
+	public void DisplayWinPanel(){
+		winPanel.SetActive (true);
+	}
+
+	public void DisplayWinEvent(){
+		gameOver = true;
+		eventText.text = "Congratulations, you have ruled for 50 years! You can now retire.";
+		for (int i = 0; i < buttonList.Length; ++i) {
+			buttonList [i].GetComponentInChildren<Text> ().text = "";
+			buttonList [i].SetActive (false);
+		}
+			buttonList [1].SetActive (true);
+		buttonList [1].GetComponentInChildren<Text> ().text = "Continue";
 	}
 }

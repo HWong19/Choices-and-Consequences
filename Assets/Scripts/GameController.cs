@@ -6,7 +6,9 @@ public class GameController : MonoBehaviour {
 
 	public static GameController gameController;		//singleton
 	public EventList[] eventLists;
-
+	public float timeToWin;
+	public int startYear;
+	public int yearsTillRetirement;
 
 	public int minStartingAffinity;
 	public int maxStartingAffinity;
@@ -22,6 +24,7 @@ public class GameController : MonoBehaviour {
 	private int royalTreasury;
 
 	private GameEvent currentGameEvent;
+	private UIController UIC;
 
 	void Awake () {
 		if (gameController == null) { 
@@ -34,9 +37,16 @@ public class GameController : MonoBehaviour {
 			Destroy (this);
 		}
 	}
-		
+
+	void Start() {
+		UIC = UIController.UIC;
+
+	}
 	//----------------------geters and seters and incrementers-------------------------
 
+	public float GetTimeToWin() {return timeToWin;}
+	public int GetStartYear() {return startYear;}
+	public int GetYearsTillRetirement() {return yearsTillRetirement;}
 	public int GetPeasantAffinity() {return peasantAffinity;}
 	public int GetNobleAffinity() {return nobleAffinity;}
 	public int GetClergyAffinity() {return clergyAffinity;}
@@ -159,7 +169,6 @@ public class GameController : MonoBehaviour {
 	public void StopDiscontention(){
 		CancelInvoke ();
 	}
-
-
+		
 }
   
