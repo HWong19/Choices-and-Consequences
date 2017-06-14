@@ -21,9 +21,9 @@ MonoBehaviour:
       effectOnPeasant: 10
       effectOnNoble: 2
       effectOnClergy: 0
-      effectOnRoyalTreasury: -400
+      effectOnRoyalTreasury: -600
     - choiceMessage: Leave them be
-      effectOnPeasant: -7
+      effectOnPeasant: -5
       effectOnNoble: -1
       effectOnClergy: 0
       effectOnRoyalTreasury: 0
@@ -34,17 +34,17 @@ MonoBehaviour:
       effectOnPeasant: -10
       effectOnNoble: 0
       effectOnClergy: 0
-      effectOnRoyalTreasury: 250
+      effectOnRoyalTreasury: 1000
     - choiceMessage: Tax caviar
       effectOnPeasant: 0
       effectOnNoble: -6
       effectOnClergy: 0
-      effectOnRoyalTreasury: 150
+      effectOnRoyalTreasury: 600
     - choiceMessage: Tax tithe
       effectOnPeasant: 0
       effectOnNoble: 0
       effectOnClergy: -4
-      effectOnRoyalTreasury: 100
+      effectOnRoyalTreasury: 400
     - choiceMessage: Don't tax
       effectOnPeasant: 0
       effectOnNoble: 0
@@ -54,14 +54,14 @@ MonoBehaviour:
     eventMessage: The church wants to make brothels illegal.
     eventOptions:
     - choiceMessage: Ban brothels
-      effectOnPeasant: -10
-      effectOnNoble: -2
+      effectOnPeasant: -2
+      effectOnNoble: -10
       effectOnClergy: 13
       effectOnRoyalTreasury: 0
     - choiceMessage: Tell the church to suck it up.
-      effectOnPeasant: 7
-      effectOnNoble: 2
-      effectOnClergy: -10
+      effectOnPeasant: 2
+      effectOnNoble: 10
+      effectOnClergy: -11
       effectOnRoyalTreasury: 0
   - repeatable: 1
     eventMessage: The people want funding to make a statue of a local hero.
@@ -70,9 +70,9 @@ MonoBehaviour:
       effectOnPeasant: 10
       effectOnNoble: -2
       effectOnClergy: 0
-      effectOnRoyalTreasury: -800
+      effectOnRoyalTreasury: -600
     - choiceMessage: Don't fund it
-      effectOnPeasant: -8
+      effectOnPeasant: -7
       effectOnNoble: 1
       effectOnClergy: 0
       effectOnRoyalTreasury: 0
@@ -81,13 +81,13 @@ MonoBehaviour:
       a better verdict.
     eventOptions:
     - choiceMessage: Accept bribe
-      effectOnPeasant: -15
+      effectOnPeasant: -20
       effectOnNoble: 5
       effectOnClergy: -1
-      effectOnRoyalTreasury: 600
+      effectOnRoyalTreasury: 1000
     - choiceMessage: Don't accept bribe
       effectOnPeasant: 8
-      effectOnNoble: -10
+      effectOnNoble: -5
       effectOnClergy: 1
       effectOnRoyalTreasury: 0
     - choiceMessage: Don't accept bribe and charge for bribery
@@ -159,43 +159,50 @@ MonoBehaviour:
       effectOnClergy: -15
       effectOnRoyalTreasury: 0
   - repeatable: 1
-    eventMessage: 
+    eventMessage: A tithe dispute erupts between a peasant and a priest.
     eventOptions:
-    - choiceMessage: 
-      effectOnPeasant: 0
+    - choiceMessage: Side with the peasant
+      effectOnPeasant: 10
       effectOnNoble: 0
-      effectOnClergy: 0
+      effectOnClergy: -10
       effectOnRoyalTreasury: 0
-    - choiceMessage: 
-      effectOnPeasant: 0
+    - choiceMessage: Side with the priest
+      effectOnPeasant: -10
       effectOnNoble: 0
-      effectOnClergy: 0
+      effectOnClergy: 10
       effectOnRoyalTreasury: 0
   - repeatable: 1
-    eventMessage: 
+    eventMessage: 'The church wants you to pay 1000 gold for a expedition to a holy
+      site. '
     eventOptions:
-    - choiceMessage: 
+    - choiceMessage: Agree to pay in full
       effectOnPeasant: 0
       effectOnNoble: 0
-      effectOnClergy: 0
-      effectOnRoyalTreasury: 0
-    - choiceMessage: 
+      effectOnClergy: 10
+      effectOnRoyalTreasury: -1000
+    - choiceMessage: Agree to fund half
       effectOnPeasant: 0
       effectOnNoble: 0
-      effectOnClergy: 0
+      effectOnClergy: 5
+      effectOnRoyalTreasury: -500
+    - choiceMessage: Refuse
+      effectOnPeasant: 0
+      effectOnNoble: 0
+      effectOnClergy: -5
       effectOnRoyalTreasury: 0
   - repeatable: 1
-    eventMessage: 
+    eventMessage: A riot ensues after learning news of a scandal pertaining a high
+      official.
     eventOptions:
-    - choiceMessage: 
-      effectOnPeasant: 0
-      effectOnNoble: 0
-      effectOnClergy: 0
+    - choiceMessage: Send in the army
+      effectOnPeasant: -20
+      effectOnNoble: 15
+      effectOnClergy: 7
       effectOnRoyalTreasury: 0
-    - choiceMessage: 
-      effectOnPeasant: 0
-      effectOnNoble: 0
-      effectOnClergy: 0
+    - choiceMessage: Wait for the riot to blow over
+      effectOnPeasant: 20
+      effectOnNoble: -15
+      effectOnClergy: -7
       effectOnRoyalTreasury: 0
   - repeatable: 1
     eventMessage: 

@@ -11,13 +11,17 @@ public class EventList : ScriptableObject {
 	public int probabilityWeight;
 	public List<GameEvent> eventsList;
 
-
+	public void Reset(){
+		foreach (GameEvent ge in eventsList) {
+			ge.Reset ();
+		}
+	}
 }
 	
 [Serializable]
 public class GameEvent{
 	public bool repeatable;
-	private bool occurred = false;
+	private bool occurred;
 
 	public void toggleOccured(){
 		occurred = true;
@@ -25,6 +29,10 @@ public class GameEvent{
 
 	public bool hasOccured(){
 		return occurred;
+	}
+
+	public void Reset(){
+		occurred = false;
 	}
 
 	[HeaderAttribute("Event")]

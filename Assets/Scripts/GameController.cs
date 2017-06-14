@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 
 	public static GameController gameController;		//singleton
 	public EventList[] eventLists;
+	public WorldEventsPairList worldEventsPairList;
 	public float timeToWin;
 	public int startYear;
 	public int yearsTillRetirement;
@@ -24,7 +25,6 @@ public class GameController : MonoBehaviour {
 	private int royalTreasury;
 
 	private GameEvent currentGameEvent;
-	private UIController UIC;
 
 	void Awake () {
 		if (gameController == null) { 
@@ -39,7 +39,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Start() {
-		UIC = UIController.UIC;
+		foreach (EventList el in eventLists) {
+			el.Reset ();
+		}
 
 	}
 	//----------------------geters and seters and incrementers-------------------------
@@ -123,16 +125,17 @@ public class GameController : MonoBehaviour {
 	//-------------------------------------------------------------------------------------------------
 	public GameEvent ChooseRandomGameEvent(){
 		while (true) {
-			EventList eventList = ChooseRandomEventList ();
-			currentGameEvent = eventList.eventsList [Random.Range (0, eventList.eventsList.Count)];
-			if (currentGameEvent.eventMessage == "" || (!currentGameEvent.repeatable && currentGameEvent.hasOccured())) {
-				continue;
-			} else {
-				currentGameEvent.toggleOccured ();
-				return currentGameEvent;
-			}
+				EventList eventList = ChooseRandomEventList ();
+				currentGameEvent = eventList.eventsList [Random.Range (0, eventList.eventsList.Count)];
+				if (currentGameEvent.eventMessage == "" || (!currentGameEvent.repeatable && currentGameEvent.hasOccured ())) {
+					continue;
+				} else {
+					currentGameEvent.toggleOccured ();
+					return currentGameEvent;
+				}
 		}
 	}
+		
 
 	private EventList ChooseRandomEventList(){
 		float totalWeight = 0f;

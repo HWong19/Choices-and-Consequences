@@ -56,15 +56,15 @@ MonoBehaviour:
     eventMessage: A plague runs rampant in the poorer areas.
     eventOptions:
     - choiceMessage: Quarantine them and provide treatment
-      effectOnPeasant: 30
+      effectOnPeasant: 20
       effectOnNoble: 10
       effectOnClergy: 10
-      effectOnRoyalTreasury: -1300
+      effectOnRoyalTreasury: -2000
     - choiceMessage: Only quarantine
       effectOnPeasant: -10
-      effectOnNoble: 2
+      effectOnNoble: 5
       effectOnClergy: 0
-      effectOnRoyalTreasury: -50
+      effectOnRoyalTreasury: -100
     - choiceMessage: Do nothing
       effectOnPeasant: -20
       effectOnNoble: -20

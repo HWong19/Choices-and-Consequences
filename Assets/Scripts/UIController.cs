@@ -9,6 +9,11 @@ public class UIController : MonoBehaviour {
 
 	public GameObject gameOverPanel;
 	public GameObject winPanel;
+	public GameObject namingPanel;
+	public InputField cityNamingInputField;
+	public GameObject cityNamingErrorText;
+
+
 	public Text peasantAffinityText;
 	public Text nobleAffinityText;
 	public Text clergyAffinityText;
@@ -17,12 +22,14 @@ public class UIController : MonoBehaviour {
 	public Text dateText;
 	public Slider timerSlider;
 	public Text eventText;
+	public Text cityNameText;
 
 	public GameObject[] buttonList;
 	public GameObject[] arrowsList;
 
 	private GameController GC;
 	private bool gameOver;
+	private bool gameStarted;
 	private float timerDecreaseRate;
 	private bool discontent;
 	private int year;
@@ -43,17 +50,16 @@ public class UIController : MonoBehaviour {
 		GC = GameController.gameController;
 		RefreshUI ();
 		gameOver = false;
+		gameStarted = false;
 		discontent = false;
 		DisableArrows ();
 		year = GC.GetStartYear ();
 		yearToWin = year + GC.GetYearsTillRetirement ();
 		dateText.text = "Year: " + year.ToString();
-		timeToWin = GC.GetTimeToWin ();
-		timeYearStarted = Time.time;
 	}
 
 	void FixedUpdate(){
-		if (!gameOver){
+		if (gameStarted && !gameOver){
 			timerSlider.value -= timerDecreaseRate;
 			if (timerSlider.value <= 0) {
 				if (!discontent) {
@@ -75,6 +81,12 @@ public class UIController : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void StartGame(){
+		gameStarted = true;
+		timeToWin = GC.GetTimeToWin ();
+		timeYearStarted = Time.time;
 	}
 
 	public void RefreshUI(){
@@ -166,7 +178,7 @@ public class UIController : MonoBehaviour {
 	public void Option1Chosen(){
 		if (gameOver) {
 			DisplayGameOverPanel ();
-		} else {
+		} else if (gameStarted){
 			GC.ApplyOptionEffects (0);
 			RefreshArrows (0);
 			RefreshUI ();
@@ -177,7 +189,7 @@ public class UIController : MonoBehaviour {
 	public void Option2Chosen(){
 		if (gameOver) {
 			DisplayWinPanel ();
-		} else {
+		} else if (gameStarted){
 			GC.ApplyOptionEffects (1);
 			RefreshArrows (1);
 			RefreshUI ();
@@ -186,17 +198,21 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void Option3Chosen(){
-		GC.ApplyOptionEffects (2);
-		RefreshArrows (2);
-		RefreshUI ();
+		if (gameStarted) {
+			GC.ApplyOptionEffects (2);
+			RefreshArrows (2);
+			RefreshUI ();
+		}
 
 
 	}
 
 	public void Option4Chosen(){
-		GC.ApplyOptionEffects (3);
-		RefreshArrows (3);
-		RefreshUI ();
+		if (gameStarted) {
+			GC.ApplyOptionEffects (3);
+			RefreshArrows (3);
+			RefreshUI ();
+		}
 
 	}
 
@@ -221,7 +237,6 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void IncrementYear(){
-		print ("boop");
 		++year;
 		dateText.text = "Year: " + year.ToString();
 	}
@@ -243,5 +258,18 @@ public class UIController : MonoBehaviour {
 		}
 			buttonList [1].SetActive (true);
 		buttonList [1].GetComponentInChildren<Text> ().text = "Continue";
+	}
+
+	public void SubmitName(){
+		if (cityNamingInputField.text.Equals ("~ResetPlayerPrefs")) {
+			PlayerPrefs.DeleteAll ();
+		} else if (PlayerPrefs.HasKey (cityNamingInputField.text)) {
+			cityNamingErrorText.SetActive (true);
+		} else {
+			PlayerPrefs.SetInt (cityNamingInputField.text, 0);
+			namingPanel.SetActive (false);
+			cityNameText.text = cityNamingInputField.text;
+			StartGame ();
+		}
 	}
 }
